@@ -1,17 +1,13 @@
 package main
 
-// 
 import (
-    "github.com/gin-gonic/gin"
+    "bracket-backend/routers"
     "log"
     "net/http"
 )
 
 // our main function
 func main() {
-    router := gin.Default()
-    router.GET("/", func(context *gin.Context) {
-        context.PureJSON(http.StatusOK, "Hello")
-    })
+    router := routers.InitRouter()
     log.Fatal(http.ListenAndServe(":8000", router))
 }
