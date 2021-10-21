@@ -2,20 +2,16 @@ package main
 
 // 
 import (
-    "encoding/json"
+    "github.com/gin-gonic/gin"
     "log"
     "net/http"
-    "github.com/gorilla/mux"
 )
 
 // our main function
 func main() {
-    router := mux.NewRouter()
-    router.HandleFunc("/test", GetTest).Methods("GET")
+    router := gin.Default()
+    router.GET("/", func(context *gin.Context) {
+        context.PureJSON(http.StatusOK, "Hello")
+    })
     log.Fatal(http.ListenAndServe(":8000", router))
 }
-
-func GetTest(w http.ResponseWriter, r *http.Request) {
-    json.NewEncoder(w).Encode("Hello")
-}
-
